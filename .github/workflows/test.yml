@@ -29,8 +29,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install django djangorestframework
-        pip install django djangorestframework django-cors-headers
+        pip install django djangorestframework psycopg2 django-cors-headers
 
     - name: Run tests
       env:
