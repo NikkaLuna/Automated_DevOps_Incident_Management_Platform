@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Infrastructure Management Dashboard</title>
+    <title>Incident Management System</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <header>
-        <div class="logo">CloudManage</div>
+        <div class="logo">IncidentManage</div>
         <nav>
             <ul>
                 <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Resources</a></li>
+                <li><a href="#">Incidents</a></li>
                 <li><a href="#">Analytics</a></li>
                 <li><a href="#">Settings</a></li>
                 <li><a href="#">Support</a></li>
@@ -34,32 +34,31 @@
         <div class="sidebar">
             <input type="text" placeholder="Search...">
             <ul>
-                <li><a href="#">Compute</a></li>
-                <li><a href="#">Storage</a></li>
-                <li><a href="#">Networking</a></li>
-                <li><a href="#">Security</a></li>
-                <li><a href="#">Monitoring</a></li>
-                <li><a href="#">Billing</a></li>
+                <li><a href="#">Active Incidents</a></li>
+                <li><a href="#">Resolved Incidents</a></li>
+                <li><a href="#">Escalations</a></li>
+                <li><a href="#">Notifications</a></li>
+                <li><a href="#">Documentation</a></li>
             </ul>
         </div>
     </aside>
     <main>
         <section class="widgets">
-            <div class="widget">Active Instances</div>
-            <div class="widget">Storage Utilized</div>
-            <div class="widget">Network Traffic</div>
-            <div class="widget">Cost Estimates</div>
+            <div class="widget">Open Incidents</div>
+            <div class="widget">Resolved Incidents</div>
+            <div class="widget">Escalations</div>
+            <div class="widget">Notifications</div>
         </section>
         <section class="management-panels">
             <div class="panel">
-                <h2>Compute Resources</h2>
+                <h2>Incident Management</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Instance ID</th>
-                            <th>Type</th>
+                            <th>Incident ID</th>
+                            <th>Title</th>
                             <th>Status</th>
-                            <th>Region</th>
+                            <th>Severity</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -67,28 +66,55 @@
                         <!-- Dynamic content here -->
                     </tbody>
                 </table>
-                <button>Create New Instance</button>
+                <button>Create New Incident</button>
             </div>
             <div class="panel">
-                <h2>Storage Management</h2>
-                <!-- Similar structure to Compute Resources -->
-            </div>
-            <div class="panel">
-                <h2>Network Configuration</h2>
-                <!-- Visual representation and controls -->
+                <h2>Incident Resolution Workflows</h2>
+                <!-- Create and Edit Forms -->
+                <div class="forms">
+                    <form id="createIncidentForm">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" name="title">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description"></textarea>
+                        <label for="severity">Severity:</label>
+                        <select id="severity" name="severity">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                        <button type="submit">Create</button>
+                    </form>
+                    <form id="editIncidentForm">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" name="title" value="{{ incident.title }}">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description">{{ incident.description }}</textarea>
+                        <label for="severity">Severity:</label>
+                        <select id="severity" name="severity" value="{{ incident.severity }}">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </div>
+                <div id="incidentCards">
+                    <!-- Cards will be populated dynamically -->
+                </div>
             </div>
         </section>
         <section class="analytics-monitoring">
             <div class="analytics">
-                <h2>Performance Graphs</h2>
+                <h2>Incident Analytics</h2>
                 <!-- Graphs and data visualizations -->
             </div>
             <div class="alerts">
-                <h2>Alerts and Notifications</h2>
+                <h2>Escalation Alerts</h2>
                 <!-- Alerts list -->
             </div>
             <div class="cost-analysis">
-                <h2>Cost Analysis</h2>
+                <h2>Incident Cost Analysis</h2>
                 <!-- Cost breakdown charts -->
             </div>
         </section>
@@ -99,5 +125,74 @@
         </section>
     </main>
     <script src="{% static 'js/script.js' %}"></script>
+    <script type="text/javascript">
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        document.getElementById('createIncidentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/create-incident/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken
+                },
+                body: formData
+            }).then(response => response.json())
+            .then(data => {
+                // Update the incident list dynamically
+                updateIncidentList(data);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const contentDiv = document.getElementById('content');
+
+            const message = document.createElement('p');
+            message.textContent = 'This is a dynamically added message.';
+            contentDiv.appendChild(message);
+
+            fetch('http://localhost:8000/api/incidents/')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(incident => {
+                        const incidentElement = document.createElement('p');
+                        incidentElement.className = 'incident';
+                        incidentElement.textContent = incident.title;
+                        contentDiv.appendChild(incidentElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    const errorMessage = document.createElement('p');
+                    errorMessage.textContent = 'Failed to load data.';
+                    contentDiv.appendChild(errorMessage);
+                });
+        });
+
+        function updateIncidentList(data) {
+            const incidentCards = document.getElementById('incidentCards');
+            incidentCards.innerHTML = '';
+            data.forEach(incident => {
+                const card = document.createElement('div');
+                card.className = 'incident-card';
+                card.innerHTML = `<h3>${incident.title}</h3><p>${incident.description}</p><p>${incident.severity}</p>`;
+                incidentCards.appendChild(card);
+            });
+        }
+    </script>
 </body>
 </html>
