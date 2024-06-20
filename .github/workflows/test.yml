@@ -1,35 +1,54 @@
 name: Django CI
 
-on: [push]
+on:
+  push:
+    branches: ["master"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     services:
       postgres:
-        image: postgres:11
+        image: postgres:12
         ports:
           - 5432:5432
         env:
-          POSTGRES_DB: django_test
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
+          POSTGRES_DB: myprojectdb
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: 3.8
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install django djangorestframework
-        pip install -r requirements.txt
+        pip install django djangorestframework psycopg2 django-cors-headers
+
     - name: Run tests
       env:
-        DATABASE_URL: postgres://user:password@localhost:5432/django_test
+        DATABASE_URL: postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/myprojectdb
       run: |
         python manage.py test
+
+    - name: Test coverage
+      run: |
+        pip install coverage
+        coverage run manage.py test
+        coverage report
+        coverage xml
+      continue-on-error: true
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+
