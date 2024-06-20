@@ -1,4 +1,4 @@
-## DevOps Ticket Management System Project
+## DevOps Ticket Management System
 
 ### Project Description
 
