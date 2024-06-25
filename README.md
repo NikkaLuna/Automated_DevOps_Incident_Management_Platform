@@ -2,7 +2,7 @@
 
 ### Project Description
 
-This project is a ticket management system built using Django and Django REST framework for the backend, with HTML, CSS, and JavaScript for the frontend in PyCharm. It provides functionalities for managing tickets including creating, reading, updating, and deleting tickets. Additionally, the project integrates with AWS services and uses Terraform for infrastructure provisioning.
+This project is a ticket management system built using Django and Django REST framework for the backend and REACT for the front end. It provides functionalities for managing tickets including creating, reading, updating, and deleting tickets. Additionally, the project integrates with AWS services and uses Terraform for infrastructure provisioning.
 
 ### Features
 - **CRUD Operations:** Manage tickets with functionalities to create, read, update, and delete.
@@ -13,3 +13,10 @@ This project is a ticket management system built using Django and Django REST fr
 - **Ticket Categorization:** Categorize tickets based on severity, status, and type.
 - **Incident Resolution Workflows:** Implement workflows for incident resolution including escalations, notifications, and documentation.
 
+## Technologies Used
+
+- **Backend**: Django, Django REST Framework, PostgreSQL
+- **Frontend**: React
+- **Infrastructure**: Terraform, AWS
+- **Containerization and Deployment**: Docker, Ansible
+- **Monitoring**: Prometheus, Grafana

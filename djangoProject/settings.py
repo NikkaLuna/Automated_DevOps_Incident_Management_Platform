@@ -47,7 +47,9 @@ APPEND_SLASH = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5500",
-    "http://yourfrontenddomain.com",
+    "http://frontenddomain.com",
+    "http://localhost:3000"
+
 ]
 
 REST_FRAMEWORK = {
