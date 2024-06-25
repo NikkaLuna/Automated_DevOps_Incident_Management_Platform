@@ -29,13 +29,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install django djangorestframework psycopg2 django-cors-headers
+        pip install django djangorestframework psycopg2 django-cors-headers requests
 
     - name: Run tests
       env:
         DATABASE_URL: postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/myprojectdb
       run: |
-        python manage.py test
+        python manage.py test myapplication.tests
 
     - name: Test coverage
       run: |
