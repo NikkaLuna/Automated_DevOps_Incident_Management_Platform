@@ -31,6 +31,19 @@ jobs:
         python -m pip install --upgrade pip
         pip install django djangorestframework psycopg2 django-cors-headers requests
 
+
+    - name: Set up database
+      run: |
+        python manage.py makemigrations
+        python manage.py migrate
+
+
+    - name: Start Django server
+      run: |
+        python manage.py runserver 0.0.0.0:8000 &
+      env:
+        DATABASE_URL: postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/myprojectdb
+
     - name: Run tests
       env:
         DATABASE_URL: postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/myprojectdb
