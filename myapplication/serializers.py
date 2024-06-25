@@ -1,5 +1,17 @@
-from .models import ExampleModel, Item, Ticket, Category, Log, Resource
 from rest_framework import serializers
+from .models import Incident, IncidentLog, ExampleModel, Item, Ticket, Category, Log, Resource
+
+
+class IncidentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Incident
+        fields = '__all__'
+
+
+class IncidentLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IncidentLog
+        fields = '__all__'
 
 
 class ResourceSerializer(serializers.ModelSerializer):

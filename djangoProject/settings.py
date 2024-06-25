@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapplication.apps.MyapplicationConfig',
+    'users',
     'rest_framework',
     'corsheaders',
 ]
@@ -40,6 +41,9 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+APPEND_SLASH = True
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5500",
@@ -99,6 +103,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',

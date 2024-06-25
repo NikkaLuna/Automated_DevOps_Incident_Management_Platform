@@ -62,11 +62,11 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="incidentTableBody">
                         <!-- Dynamic content here -->
                     </tbody>
                 </table>
-                <button>Create New Incident</button>
+                <button id="createIncidentButton">Create New Incident</button>
             </div>
             <div class="panel">
                 <h2>Incident Resolution Workflows</h2>
@@ -85,13 +85,13 @@
                         </select>
                         <button type="submit">Create</button>
                     </form>
-                    <form id="editIncidentForm">
+                    <form id="editIncidentForm" style="display:none;">
                         <label for="title">Title:</label>
-                        <input type="text" id="title" name="title" value="{{ incident.title }}">
+                        <input type="text" id="editTitle" name="title">
                         <label for="description">Description:</label>
-                        <textarea id="description" name="description">{{ incident.description }}</textarea>
+                        <textarea id="editDescription" name="description"></textarea>
                         <label for="severity">Severity:</label>
-                        <select id="severity" name="severity" value="{{ incident.severity }}">
+                        <select id="editSeverity" name="severity">
                             <option value="Low">Low</option>
                             <option value="Medium">Medium</option>
                             <option value="High">High</option>
@@ -159,39 +159,60 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            const contentDiv = document.getElementById('content');
+            fetchIncidents();
+        });
 
-            const message = document.createElement('p');
-            message.textContent = 'This is a dynamically added message.';
-            contentDiv.appendChild(message);
-
+        function fetchIncidents() {
             fetch('http://localhost:8000/api/incidents/')
                 .then(response => response.json())
                 .then(data => {
-                    data.forEach(incident => {
-                        const incidentElement = document.createElement('p');
-                        incidentElement.className = 'incident';
-                        incidentElement.textContent = incident.title;
-                        contentDiv.appendChild(incidentElement);
-                    });
+                    updateIncidentList(data);
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
                     const errorMessage = document.createElement('p');
                     errorMessage.textContent = 'Failed to load data.';
-                    contentDiv.appendChild(errorMessage);
+                    document.getElementById('incidentTableBody').appendChild(errorMessage);
                 });
-        });
+        }
 
         function updateIncidentList(data) {
+            const incidentTableBody = document.getElementById('incidentTableBody');
             const incidentCards = document.getElementById('incidentCards');
+            incidentTableBody.innerHTML = '';
             incidentCards.innerHTML = '';
             data.forEach(incident => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${incident.id}</td>
+                    <td>${incident.title}</td>
+                    <td>${incident.status}</td>
+                    <td>${incident.severity}</td>
+                    <td><button onclick="editIncident(${incident.id})">Edit</button></td>
+                `;
+                incidentTableBody.appendChild(row);
+
                 const card = document.createElement('div');
                 card.className = 'incident-card';
                 card.innerHTML = `<h3>${incident.title}</h3><p>${incident.description}</p><p>${incident.severity}</p>`;
                 incidentCards.appendChild(card);
             });
+        }
+
+        function editIncident(id) {
+            // Fetch the incident data and populate the edit form
+            fetch(`http://localhost:8000/api/incidents/${id}/`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('editTitle').value = data.title;
+                    document.getElementById('editDescription').value = data.description;
+                    document.getElementById('editSeverity').value = data.severity;
+                    document.getElementById('editIncidentForm').style.display = 'block';
+                    document.getElementById('createIncidentForm').style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error fetching incident data:', error);
+                });
         }
     </script>
 </body>
