@@ -1,0 +1,188 @@
+/* style.css */
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2c3e50;
+    color: white;
+    padding: 1rem;
+}
+
+header .logo {
+    font-size: 1.5rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.user-profile {
+    position: relative;
+}
+
+.user-profile img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.user-profile .dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    color: black;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+.user-profile:hover .dropdown {
+    display: block;
+}
+
+.user-profile .dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.user-profile .dropdown ul li {
+    padding: 0.5rem 1rem;
+}
+
+.user-profile .dropdown ul li a {
+    text-decoration: none;
+    color: #2c3e50;
+}
+
+aside {
+    width: 200px;
+    background: #34495e;
+    color: white;
+    flex-shrink: 0;
+}
+
+.sidebar {
+    padding: 1rem;
+}
+
+.sidebar input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 4px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 1rem;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    flex-grow: 1;
+    padding: 1rem;
+}
+
+.widgets {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.widget {
+    background: #ecf0f1;
+    padding: 1rem;
+    border-radius: 4px;
+    width: 22%;
+    text-align: center;
+}
+
+.management-panels {
+    margin-bottom: 1rem;
+}
+
+.panel {
+    background: white;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.panel table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.panel table th, .panel table td {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+}
+
+.panel button {
+    padding: 0.5rem 1rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.analytics-monitoring {
+    display: flex;
+    justify-content: space-between;
+}
+
+.analytics, .alerts, .cost-analysis {
+    width: 32%;
+    background: white;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.support {
+    background: white;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.support button {
+    padding: 0.5rem 1rem;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
