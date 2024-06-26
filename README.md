@@ -1,4 +1,4 @@
-## DevOps Ticket Management System
+## Automated DevOps Incident Management Platform
 
 ### Project Description
 
