@@ -7,7 +7,7 @@ import UserProfile from '../UserProfile';
 function Header() {
     return (
       <header>
-        <div className="logo">IncidentManage</div>
+        <div className="logo">Incident Management System</div>
         <nav>
           <ul>
             <li><a href="#dashboard">Dashboard</a></li>

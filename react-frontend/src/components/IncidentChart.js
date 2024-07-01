@@ -1,27 +1,62 @@
-// src/components/IncidentChart.js
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import React, { useEffect, useRef } from 'react';
+import Chart from 'chart.js/auto';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+const IncidentChart = ({ data, chartType }) => {
+  const chartRef = useRef(null);
+  const chartInstance = useRef(null);
 
-const IncidentChart = ({ data }) => {
-  const chartData = {
-    labels: ['Open', 'Resolved', 'Escalated'],
-    datasets: [
-      {
-        label: 'Incidents',
-        data: [
-          data.filter(incident => incident.status === 'Open').length,
-          data.filter(incident => incident.status === 'Resolved').length,
-          data.filter(incident => incident.status === 'Escalated').length,
+  useEffect(() => {
+    const ctx = chartRef.current.getContext('2d');
+    if (chartInstance.current) {
+      chartInstance.current.destroy();
+    }
+    chartInstance.current = new Chart(ctx, {
+      type: chartType,
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [
+          {
+            label: 'Active Incidents',
+            data: data.activeIncidents,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          },
+          {
+            label: 'Resolved Incidents',
+            data: data.resolvedIncidents,
+            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          },
+          {
+            label: 'Escalations',
+            data: data.escalations,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          },
         ],
-        backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56'],
       },
-    ],
-  };
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
 
-  return <Bar data={chartData} />;
+    return () => {
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
+      }
+    };
+  }, [data, chartType]);
+
+  return (
+    <div className="chart-container">
+      <canvas ref={chartRef}></canvas>
+    </div>
+  );
 };
 
 export default IncidentChart;
