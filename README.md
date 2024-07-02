@@ -4,6 +4,14 @@
 
 This project is a ticket management system built using Django and Django REST framework for the backend and REACT for the front end. It provides functionalities for managing tickets including creating, reading, updating, and deleting tickets. Additionally, the project integrates with AWS services and uses Terraform for infrastructure provisioning.
 
+
+
+<p align="center">
+  <img src="IncidentManagementSystem.png" alt="Incident Management System">
+</p>
+
+
+
 ### Features
 - **CRUD Operations:** Manage tickets with functionalities to create, read, update, and delete.
 - **User Authentication:** Implement user management and role-based access control.
