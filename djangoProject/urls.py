@@ -6,4 +6,3 @@ urlpatterns = [
     path('api/', include('myapplication.api_urls')),  # Separate API URLs
     path('', include('myapplication.urls')),  # Root URL
 ]
-

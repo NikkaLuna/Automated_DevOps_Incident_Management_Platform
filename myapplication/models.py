@@ -1,6 +1,7 @@
 from django.db import models
 
 
+# Resource model
 class Resource(models.Model):
     name = models.CharField(max_length=200)
     type = models.CharField(max_length=200)
@@ -9,6 +10,7 @@ class Resource(models.Model):
         return self.name
 
 
+# Example model
 class ExampleModel(models.Model):
     name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -17,6 +19,7 @@ class ExampleModel(models.Model):
         return self.name
 
 
+# Item model
 class Item(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -25,13 +28,15 @@ class Item(models.Model):
         return self.name
 
 
+# Category model
 class Category(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 
+# Incident model with status and severity choices
 class Incident(models.Model):
     STATUS_CHOICES = [
         ('Open', 'Open'),
@@ -56,6 +61,7 @@ class Incident(models.Model):
         return self.title
 
 
+# IncidentLog model linking to Incident
 class IncidentLog(models.Model):
     incident = models.ForeignKey(Incident, on_delete=models.CASCADE)
     action = models.CharField(max_length=200)
@@ -65,6 +71,7 @@ class IncidentLog(models.Model):
         return f'{self.incident.title} - {self.action} at {self.timestamp}'
 
 
+# Ticket model with category and status
 class Ticket(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -77,6 +84,7 @@ class Ticket(models.Model):
         return self.title
 
 
+# Log model linking to Ticket
 class Log(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     action = models.CharField(max_length=200)

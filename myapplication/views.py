@@ -4,13 +4,17 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets, filters
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from .models import Resource, ExampleModel, Item, Ticket, Category, Log, Incident, IncidentLog
 from .serializers import (
     ExampleModelSerializer, ItemSerializer, ResourceSerializer, IncidentSerializer, IncidentLogSerializer,
     TicketSerializer, CategorySerializer, LogSerializer
 )
+
+
+def index(request):
+    return render(request, 'base.html')
 
 
 class IncidentViewSet(viewsets.ModelViewSet):
@@ -50,6 +54,12 @@ class ItemViewSet(viewsets.ModelViewSet):
 class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        # Add logging to debug request data
+        print("Creating ticket with data:", serializer.validated_data)
+        serializer.save()
 
 
 class CategoryViewSet(viewsets.ModelViewSet):

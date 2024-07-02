@@ -12,7 +12,6 @@ SECRET_KEY = 'django-insecure-h9ff=2l9zu(f-d6fggjlpklyl85dynf%qox3h@)zd$5_+dkgxa
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -40,18 +39,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Enable CORS (Cross-Origin Resource Sharing)
 CORS_ALLOW_ALL_ORIGINS = True
 
-APPEND_SLASH = True
-
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5500",
-    "http://frontenddomain.com",
-    "http://localhost:3000"
-
+# Ensure CSRF tokens are included in AJAX requests
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',  # Add the address of your React development server
 ]
 
+# Rest Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
@@ -83,7 +79,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'djangoProject.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -98,7 +93,6 @@ DATABASES = {
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 # Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -118,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -128,12 +121,10 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'myapplication/static'),
+    os.path.join(BASE_DIR, 'myapplication/static'),  # Ensure this path is correct
 ]
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

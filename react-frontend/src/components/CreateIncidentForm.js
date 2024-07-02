@@ -1,14 +1,30 @@
-// src/components/CreateIncidentForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './CreateIncidentForm.css';
+import getCookie from '../utils/csrfToken';
+
+import '../dataTables.bootstrap4.min.css';
+import '../jquery.dataTables.min.js';
+import '../dataTables.bootstrap4.min.js';
 
 function CreateIncidentForm() {
   const [incident, setIncident] = useState({
     title: '',
     description: '',
-    severity: 'Low'
+    severity: 'Low',
+    category: '',
+    status: 'Open'
   });
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const response = await fetch('http://localhost:8000/api/categories/');
+      const data = await response.json();
+      setCategories(data);
+    }
+    fetchCategories();
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -20,36 +36,55 @@ function CreateIncidentForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch('/create-incident/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken') // Ensure you handle CSRF tokens correctly
-      },
-      body: JSON.stringify(incident)
-    });
-    const data = await response.json();
-    console.log(data); // Handle the response
-  };
 
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
+    const ticket = {
+      title: incident.title,
+      description: incident.description,
+      severity: incident.severity,
+      category: incident.category,
+      status: incident.status,
+    };
+
+    console.log('Submitting ticket:', ticket); // Debugging line
+
+    const csrfToken = getCookie('csrftoken');
+    const username = 'devopsgirl';
+    const password = 'new-password'; 
+
+    try {
+      const response = await fetch('http://localhost:8000/api/tickets/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken,
+          'Authorization': 'Basic ' + btoa(`${username}:${password}`),
+        },
+        body: JSON.stringify(ticket),
+      });
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        alert('Ticket created successfully!');
+        setIncident({
+          title: '',
+          description: '',
+          severity: 'Low',
+          category: '',
+          status: 'Open'
+        });
+      } else {
+        console.error('Error response:', responseData);
+        alert('Failed to create ticket.');
       }
+    } catch (error) {
+      console.error('Fetch error:', error);
     }
-    return cookieValue;
-  }
+  };
 
   return (
     <div className="container">
-      <h1 className="header">Create Ticket</h1> {/* Apply the header class */}
+      <h1 className="header">Create Ticket</h1>
       <div className="form-wrapper">
         <form onSubmit={handleSubmit} className="incident-form">
           <div className="form-group">
@@ -88,6 +123,37 @@ function CreateIncidentForm() {
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="category">Category:</label>
+            <select
+              id="category"
+              name="category"
+              value={incident.category}
+              onChange={handleChange}
+              className="form-control"
+            >
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="status">Status:</label>
+            <select
+              id="status"
+              name="status"
+              value={incident.status}
+              onChange={handleChange}
+              className="form-control"
+            >
+              <option value="Open">Open</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+              <option value="Closed">Closed</option>
             </select>
           </div>
           <button type="submit" className="btn btn-primary">Create Ticket</button>

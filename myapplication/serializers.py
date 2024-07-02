@@ -37,6 +37,14 @@ class TicketSerializer(serializers.ModelSerializer):
         model = Ticket
         fields = '__all__'
 
+    def validate(self, data):
+        # Add custom validation logic here
+        if not data['title']:
+            raise serializers.ValidationError("Title is required")
+        return data
+
+
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
