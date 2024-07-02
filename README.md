@@ -6,10 +6,13 @@ This project is a ticket management system built using Django and Django REST fr
 
 
 
+## Front End
+
 <p align="center">
-  <img src="IncidentManagementSystem.png" alt="Incident Management System">
+  <img src="FrontEnd.jpg" alt="Front End" style="width:600px;">
 </p>
 
+*Screenshot displaying the front-end interface of the application.*
 
 
 ### Features
