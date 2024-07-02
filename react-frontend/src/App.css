@@ -1,104 +1,165 @@
-/* src/App.css */
+/* App.css */
 
-/* Existing Styles */
-.App {
-  text-align: center;
+/* Add any global styles here */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000; /* Dark gray background color */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-form {
-  background: #333;
-  color: white;
-  padding: 20px;
-}
-
-input[type="text"], textarea, select {
-  margin: 10px 0;
-  padding: 8px;
-  width: 100%;
-}
-
-button {
-  padding: 10px 15px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-/* New Styles */
 .app-body {
-  display: flex;
+  margin-top: 3px; /* Adjust the margin-top as needed */
+  background-color: #000; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff; /* White color for headings */
 }
 
 .main-content {
+  margin-top: 0; /* Ensure no extra margin at the top */
+  padding-top: 0; /* Ensure no extra padding at the top */
   padding: 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  background-color: #000; /* Dark gray background color */
 }
 
-.dashboard-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.chart-section {
-  display: flex;
-  gap: 20px;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.line-chart, .pie-chart {
-  flex: 1;
-  min-width: 300px;
-  height: 400px;
-}
-
-.chart-container {
+/* Styling for the table */
+.table {
   width: 100%;
-  height: 100%;
+  margin-bottom: 1rem;
+  color: #fff;
+  border-collapse: collapse;
+}
+
+.container {
+  display: block;
+}
+
+/* Table Styling */
+.table {
+  width: 100%; /* Ensure the table fills its container */
+  margin-bottom: 1rem;
+  color: #fff;
+  border-collapse: collapse;
+  table-layout: fixed; /* This will make columns equal width and prevent them from expanding due to content */
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;    /* Adjust padding to your preference */
+  vertical-align: top;
+  border-top: 1px solid #e3e6f0;
+  text-align: left; 
+  word-wrap: break-word; /* Allow long words to wrap */
+}
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #e3e6f0;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #e3e6f0;
+}
+
+.table tbody + tbody {
+  border-top: 2px solid #e3e6f0;
+}
+
+.table .table {
+  background-color: #212529;
+}
+
+.table-dark {
+  color: #fff;
+  background-color: #212529;
+}
+
+.table-dark th,
+.table-dark td,
+.table-dark thead th {
+  border-color: #32383e;
+}
+
+.table-dark.table-bordered {
+  border: 0;
+}
+
+/* Custom DataTables styles */
+.dataTables_wrapper {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  color: white !important;
+  background-color: #4e73df !important;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin: 2px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background-color: #2e59d9 !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #ddd;
+  padding: 5px;
+  margin-left: 5px;
+  border-radius: 4px;
+}
+
+.dataTables_wrapper .dataTables_length select {
+  border: 1px solid #ddd;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+/* New styles to adjust table row height and table width */
+.dataTables_wrapper .dataTables_scroll {
+  width: 100% !important; /* Ensures table takes full width of container */
+}
+
+.dataTables_wrapper .dataTables_scrollHeadInner table, 
+.dataTables_wrapper .dataTables_scrollBody table {
+  width: 100% !important; /* Ensures table takes full width of container */
+}
+
+.dataTables_wrapper table.dataTable td, 
+.dataTables_wrapper table.dataTable th {
+  padding: 10px 15px; /* Adjust padding to control row height */
+  white-space: nowrap; /* Prevents text wrapping, keeps rows compact */
+}
+
+.dataTables_wrapper table.dataTable tr {
+  height: 40px; /* Adjust row height as needed */
+}
+
+/* App.css */
+/* ... other styles ... */
+
+/* Apply global font to DataTables elements */
+.dataTables_wrapper,           /* Main DataTables container */
+.dataTables_wrapper .dataTables_filter, /* Search/filter area */
+.dataTables_wrapper .dataTables_info,   /* Table information */
+.dataTables_wrapper .dataTables_length, /* Entries per page dropdown */
+.dataTables_wrapper .dataTables_paginate, /* Pagination controls */
+.dataTables_wrapper table,    /* The actual table element */
+.dataTables_wrapper th,       /* Table header cells */
+.dataTables_wrapper td {      /* Table data cells */
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
 }

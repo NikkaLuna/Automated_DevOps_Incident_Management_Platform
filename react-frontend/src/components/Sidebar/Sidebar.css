@@ -1,0 +1,28 @@
+/* src/components/Sidebar/Sidebar.css */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; /* Adjust width as needed */
+    height: 100%;
+    background-color: #343a40; /* Sidebar background color */
+    color: #fff; /* Sidebar text color */
+    padding-top: 1rem; /* Padding at the top, adjust as needed */
+    z-index: 1000; /* Ensure the sidebar is above other content */
+  }
+  
+  
+  .sidebar .nav-link {
+    color: #fff; /* Link color */
+  }
+  
+  .sidebar .nav-link:hover {
+    background-color: #495057; /* Hover effect */
+  }
+  
+  /* Ensure the main content does not overlap with the sidebar */
+  .main-content {
+    margin-left: 250px; /* Same width as the sidebar */
+    padding: 1rem; /* Padding for main content */
+  }
+  

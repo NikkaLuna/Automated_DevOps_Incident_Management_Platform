@@ -1,12 +1,20 @@
 /* style.css */
+
+/* General body styling */
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
 }
 
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Header styling */
 header {
     display: flex;
     justify-content: space-between;
@@ -36,6 +44,7 @@ nav ul li a {
     text-decoration: none;
 }
 
+/* User profile styling */
 .user-profile {
     position: relative;
 }
@@ -76,8 +85,9 @@ nav ul li a {
     color: #2c3e50;
 }
 
+/* Sidebar styling */
 aside {
-    width: 250px; /* Increased width for the sidebar */
+    width: 250px;
     background: #34495e;
     color: white;
     flex-shrink: 0;
@@ -109,11 +119,14 @@ aside {
     text-decoration: none;
 }
 
+/* Main content styling */
 main {
     flex-grow: 1;
     padding: 1rem;
+    width: 100%; /* Ensure main content takes full width */
 }
 
+/* Widget and panel styling */
 .widgets {
     display: flex;
     justify-content: space-between;
@@ -159,6 +172,7 @@ main {
     cursor: pointer;
 }
 
+/* Analytics and support panel styling */
 .analytics-monitoring {
     display: flex;
     justify-content: space-between;
@@ -185,4 +199,63 @@ main {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+
+
+/* Custom DataTables styles */
+.dataTables_wrapper {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: white !important;
+    background-color: #4e73df !important;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 2px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #2e59d9 !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 4px;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* New styles to adjust table row height and table width */
+.table-container {
+    width: 100%; /* Ensures container takes full width */
+    overflow-x: auto; /* Allows horizontal scrolling if table width exceeds container */
+}
+
+.dataTables_wrapper .dataTables_scroll {
+    width: 100% !important; /* Ensures table takes full width of container */
+}
+
+.dataTables_wrapper .dataTables_scrollHeadInner table, 
+.dataTables_wrapper .dataTables_scrollBody table {
+    width: 100% !important; /* Ensures table takes full width of container */
+}
+
+.dataTables_wrapper table.dataTable td, 
+.dataTables_wrapper table.dataTable th {
+    padding: 10px 15px; /* Adjust padding to control row height */
+    white-space: nowrap; /* Prevents text wrapping, keeps rows compact */
+}
+
+.dataTables_wrapper table.dataTable tr {
+    height: 40px; /* Adjust row height as needed */
 }

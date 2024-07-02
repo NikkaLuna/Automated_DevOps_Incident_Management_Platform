@@ -6,6 +6,11 @@ import './sb-admin-2.min.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import $ from 'jquery';
+import 'datatables.net-bs4';
+
+window.jQuery = $;
+window.$ = $;
 
 // Create the root element
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,4 +23,3 @@ root.render(
 );
 
 reportWebVitals();
-

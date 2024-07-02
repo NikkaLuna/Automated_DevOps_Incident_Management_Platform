@@ -1,5 +1,7 @@
 // src/components/CreateIncidentForm.js
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './CreateIncidentForm.css';
 
 function CreateIncidentForm() {
   const [incident, setIncident] = useState({
@@ -10,7 +12,7 @@ function CreateIncidentForm() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setIncident(prevState => ({
+    setIncident((prevState) => ({
       ...prevState,
       [name]: value
     }));
@@ -22,29 +24,13 @@ function CreateIncidentForm() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken')  // Ensure you handle CSRF tokens correctly
+        'X-CSRFToken': getCookie('csrftoken') // Ensure you handle CSRF tokens correctly
       },
       body: JSON.stringify(incident)
     });
     const data = await response.json();
-    console.log(data);  // Handle the response
+    console.log(data); // Handle the response
   };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="title">Title:</label>
-      <input type="text" id="title" name="title" value={incident.title} onChange={handleChange} />
-      <label htmlFor="description">Description:</label>
-      <textarea id="description" name="description" value={incident.description} onChange={handleChange} />
-      <label htmlFor="severity">Severity:</label>
-      <select id="severity" name="severity" value={incident.severity} onChange={handleChange}>
-        <option value="Low">Low</option>
-        <option value="Medium">Medium</option>
-        <option value="High">High</option>
-      </select>
-      <button type="submit">Create</button>
-    </form>
-  );
 
   function getCookie(name) {
     let cookieValue = null;
@@ -60,7 +46,53 @@ function CreateIncidentForm() {
     }
     return cookieValue;
   }
-  
+
+  return (
+    <div className="container">
+     <h1 className="header">Create Ticket</h1> {/* Apply the header class */}
+      <form onSubmit={handleSubmit} className="incident-form">
+        <div className="form-group">
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={incident.title}
+            onChange={handleChange}
+            className="form-control"
+            placeholder="Enter title"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="description">Description:</label>
+          <textarea
+            id="description"
+            name="description"
+            value={incident.description}
+            onChange={handleChange}
+            className="form-control"
+            rows="3"
+            placeholder="Enter description"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="severity">Severity:</label>
+          <select
+            id="severity"
+            name="severity"
+            value={incident.severity}
+            onChange={handleChange}
+            className="form-control"
+          >
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+        <button type="submit" className="btn btn-primary">Create Ticket</button>
+      </form>
+    </div>
+  );
 }
 
 export default CreateIncidentForm;

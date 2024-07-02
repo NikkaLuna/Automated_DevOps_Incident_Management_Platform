@@ -1,9 +1,11 @@
-/* src/Dashboard.css or src/App.css */
+/* src/Dashboard.css */
 
+/* General styling for the dashboard */
 .dashboard {
   padding: 20px;
 }
 
+/* Styling for the card sections */
 .cards-section {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -11,6 +13,7 @@
   margin-bottom: 20px;
 }
 
+/* Styling for the chart sections */
 .charts-section {
   display: flex;
   gap: 20px;
@@ -22,11 +25,53 @@
   height: 400px; /* Adjust as needed */
 }
 
+/* Styling for the cards */
+.card {
+  background-color: #1c1c1c !important; /* Black background */
+  color: #f0f0f0; /* Light text color */
+}
+
+.card .card-header {
+  background-color: #1c1c1c !important; /* Ensure header matches the card background */
+  border-bottom: 1px solid #4e73df; /* Optional: add border for header */
+  color: #f0f0f0; /* Light text color */
+}
+
+.card .card-body {
+  color: #f0f0f0; /* Light text color */
+}
+
+/* Ensure icons have the right color */
+.card .fa {
+  color: #f0f0f0 !important; /* Light icon color */
+}
+
+/* Ensure card headers have white text */
+.card-header h6 {
+  color: #ffffff !important; /* Force white color for text in card headers */
+}
+
+/* Specific styles for dashboard card titles */
+.text-primary {
+  color: #ffffff !important; /* Force white color for text with .text-primary class */
+}
+
+.text-gray-800 {
+  color: #ffffff !important; /* Force white color for text with .text-gray-800 class */
+}
+
+/* Additional styles for dashboard */
+.dashboard .h3, .dashboard .h5, .dashboard .h6 {
+  color: #ffffff !important; /* Force white color for text in dashboard headers */
+}
+
+/* Chart container styling */
 .chart-container {
   width: 100%;
   height: 100%;
 }
 
+/* Equal height styling for cards */
 .equal-height {
   display: flex;
   flex-direction: column;

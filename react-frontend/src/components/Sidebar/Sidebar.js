@@ -1,5 +1,6 @@
 // src/components/Sidebar/Sidebar.js
 import React from 'react';
+import './Sidebar.css';
 
 const Sidebar = ({ setActiveComponent }) => {
   return (
@@ -8,7 +9,7 @@ const Sidebar = ({ setActiveComponent }) => {
         <div className="sidebar-brand-icon">
           <i className="fas fa-laugh-wink"></i>
         </div>
-        <div className="sidebar-brand-text mx-3">Incident Management</div>
+        <div className="sidebar-brand-text mx-3">Incident Management System</div>
       </a>
 
       <hr className="sidebar-divider my-0" />
@@ -21,9 +22,16 @@ const Sidebar = ({ setActiveComponent }) => {
       </li>
 
       <li className="nav-item">
+        <a className="nav-link" href="#!" onClick={() => setActiveComponent('create-ticket')}>
+          <i className="fas fa-fw fa-plus-circle"></i>
+          <span>Create Ticket</span>
+        </a>
+      </li>
+
+      <li className="nav-item">
         <a className="nav-link" href="#!" onClick={() => setActiveComponent('active-incidents')}>
           <i className="fas fa-fw fa-exclamation-circle"></i>
-          <span>Active Incidents</span>
+          <span>Open Incidents</span>
         </a>
       </li>
 
@@ -45,13 +53,6 @@ const Sidebar = ({ setActiveComponent }) => {
         <a className="nav-link" href="#!" onClick={() => setActiveComponent('notifications')}>
           <i className="fas fa-fw fa-bell"></i>
           <span>Notifications</span>
-        </a>
-      </li>
-
-      <li className="nav-item">
-        <a className="nav-link" href="#!" onClick={() => setActiveComponent('documentation')}>
-          <i className="fas fa-fw fa-book"></i>
-          <span>Documentation</span>
         </a>
       </li>
     </ul>

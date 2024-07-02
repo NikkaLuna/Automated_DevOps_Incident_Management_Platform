@@ -26,3 +26,4 @@ const DashboardCard = ({ title, value, icon }) => {
 };
 
 export default DashboardCard;
+

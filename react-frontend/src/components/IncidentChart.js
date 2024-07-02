@@ -19,19 +19,19 @@ const IncidentChart = ({ data, chartType }) => {
             label: 'Active Incidents',
             data: data.activeIncidents,
             borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            backgroundColor: 'rgba(255, 255, 255, 1)', // Changed to white
           },
           {
             label: 'Resolved Incidents',
             data: data.resolvedIncidents,
             borderColor: 'rgba(54, 162, 235, 1)',
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            backgroundColor: 'rgba(255, 255, 255, 1)', // Changed to white
           },
           {
             label: 'Escalations',
             data: data.escalations,
             borderColor: 'rgba(255, 99, 132, 1)',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            backgroundColor: 'rgba(255, 255, 255, 1)', // Changed to white
           },
         ],
       },

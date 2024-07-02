@@ -1,0 +1,94 @@
+/* src/DashboardHeader.css */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Adjust padding as necessary */
+    padding-bottom: 0.5rem; /* Reduce bottom padding */
+    background-color: #343a40;
+    color: white;
+    width: 100%; /* Make the header take up the full width */
+    margin-left: 0;  /* Remove the left margin */
+    width: calc(100% - 220px); /* Adjust width based on your sidebar width */
+    margin-left: 225px; /* Adjust margin to account for the sidebar width */
+    margin-top: 48px; /* Add margin-top to push the header down */
+    box-sizing: border-box; /* Ensure padding does not cause overflow */
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    margin-right: auto; /* Push search bar to the left */
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+  }
+  
+  .search-button {
+    background-color: #4e73df;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .generate-report-button {
+    background-color: #4e73df;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .generate-report-button i {
+    margin-right: 5px;
+  }
+  
+
+    
+  .notification-bell {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .notification-bell .unread-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 12px;
+  }
+  
+  /* Add this rule for a better look on smaller screens */
+  @media (max-width: 768px) {
+    .dashboard-header {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      margin-left: 0;
+    }
+  
+    .search-bar {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .generate-report-button, .notification-bell {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  

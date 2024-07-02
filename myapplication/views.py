@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
@@ -16,6 +16,15 @@ from .serializers import (
 class IncidentViewSet(viewsets.ModelViewSet):
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['status']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        status = self.request.query_params.get('status')
+        if status:
+            queryset = queryset.filter(status=status)
+        return queryset
 
 
 class IncidentLogViewSet(viewsets.ModelViewSet):
@@ -55,20 +64,26 @@ class LogViewSet(viewsets.ModelViewSet):
 
 @api_view(['POST'])
 def escalate_incident(request, pk):
-    incident = Incident.objects.get(pk=pk)
-    incident.status = 'Escalated'
-    incident.save()
-    serializer = IncidentSerializer(incident)
-    return Response(serializer.data)
+    try:
+        incident = Incident.objects.get(pk=pk)
+        incident.status = 'Escalated'
+        incident.save()
+        serializer = IncidentSerializer(incident)
+        return Response(serializer.data)
+    except Incident.DoesNotExist:
+        return Response({'error': 'Incident not found'}, status=404)
 
 
 @api_view(['POST'])
 def resolve_incident(request, pk):
-    incident = Incident.objects.get(pk=pk)
-    incident.status = 'Resolved'
-    incident.save()
-    serializer = IncidentSerializer(incident)
-    return Response(serializer.data)
+    try:
+        incident = Incident.objects.get(pk=pk)
+        incident.status = 'Resolved'
+        incident.save()
+        serializer = IncidentSerializer(incident)
+        return Response(serializer.data)
+    except Incident.DoesNotExist:
+        return Response({'error': 'Incident not found'}, status=404)
 
 
 def index(request):
@@ -83,9 +98,10 @@ def home(request):
 def create_resource(request):
     if request.method == 'POST':
         name = request.POST.get('name')
-        resource_type = request.POST.get('type')  # Renamed variable
+        resource_type = request.POST.get('type')
         resource = Resource.objects.create(name=name, type=resource_type)
         return JsonResponse({'id': resource.id, 'name': resource.name, 'type': resource.type})
+    return HttpResponse(status=405)
 
 
 @csrf_exempt
@@ -93,9 +109,13 @@ def update_resource(request):
     if request.method == 'POST':
         resource_id = request.POST.get('id')
         name = request.POST.get('name')
-        resource_type = request.POST.get('type')  # Renamed variable
-        resource = Resource.objects.get(id=resource_id)
-        resource.name = name
-        resource.type = resource_type
-        resource.save()
-        return JsonResponse({'id': resource.id, 'name': resource.name, 'type': resource.type})
+        resource_type = request.POST.get('type')
+        try:
+            resource = Resource.objects.get(id=resource_id)
+            resource.name = name
+            resource.type = resource_type
+            resource.save()
+            return JsonResponse({'id': resource.id, 'name': resource.name, 'type': resource.type})
+        except Resource.DoesNotExist:
+            return JsonResponse({'error': 'Resource not found'}, status=404)
+    return HttpResponse(status=405)
