@@ -9,11 +9,10 @@ This project is a ticket management system built using Django and Django REST fr
 ## Front End
 
 <p align="center">
-  <img src="FrontEnd.jpg" alt="Front End" style="width:600px;">
+  <img src="FrontEnd.jpg" alt="Front End" width="900" height="450">
 </p>
 
 *Screenshot displaying the front-end interface of the application.*
-
 
 ### Features
 - **CRUD Operations:** Manage tickets with functionalities to create, read, update, and delete.
