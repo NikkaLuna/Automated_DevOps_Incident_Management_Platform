@@ -49,48 +49,50 @@ function CreateIncidentForm() {
 
   return (
     <div className="container">
-     <h1 className="header">Create Ticket</h1> {/* Apply the header class */}
-      <form onSubmit={handleSubmit} className="incident-form">
-        <div className="form-group">
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={incident.title}
-            onChange={handleChange}
-            className="form-control"
-            placeholder="Enter title"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            name="description"
-            value={incident.description}
-            onChange={handleChange}
-            className="form-control"
-            rows="3"
-            placeholder="Enter description"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="severity">Severity:</label>
-          <select
-            id="severity"
-            name="severity"
-            value={incident.severity}
-            onChange={handleChange}
-            className="form-control"
-          >
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-          </select>
-        </div>
-        <button type="submit" className="btn btn-primary">Create Ticket</button>
-      </form>
+      <h1 className="header">Create Ticket</h1> {/* Apply the header class */}
+      <div className="form-wrapper">
+        <form onSubmit={handleSubmit} className="incident-form">
+          <div className="form-group">
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={incident.title}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="Enter title"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description:</label>
+            <textarea
+              id="description"
+              name="description"
+              value={incident.description}
+              onChange={handleChange}
+              className="form-control"
+              rows="3"
+              placeholder="Enter description"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="severity">Severity:</label>
+            <select
+              id="severity"
+              name="severity"
+              value={incident.severity}
+              onChange={handleChange}
+              className="form-control"
+            >
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <button type="submit" className="btn btn-primary">Create Ticket</button>
+        </form>
+      </div>
     </div>
   );
 }

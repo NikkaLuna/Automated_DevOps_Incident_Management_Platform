@@ -45,7 +45,7 @@ const EscalatedIncidentList = () => {
 
   return (
     <div className="main-content">
-      <h1>Escalated Incidents</h1>
+      <h1 className="escalated-incidents-header">Escalated Incidents</h1>
       <div className="table-container">
         <table id="escalatedIncidentTable" className="display nowrap dataTable" style={{ width: '100%' }}>
           <thead>
@@ -85,3 +85,4 @@ const EscalatedIncidentList = () => {
 };
 
 export default EscalatedIncidentList;
+

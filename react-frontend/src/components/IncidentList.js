@@ -36,7 +36,8 @@ const IncidentList = () => {
 
   return (
     <div>
-      <h1>Open Incidents</h1>
+      
+      <h1 className="incident-header">Open Incidents</h1> {/* Added className here */}
       <table id="incidentTable" className="display table table-dark table-hover">
         <thead>
           <tr>

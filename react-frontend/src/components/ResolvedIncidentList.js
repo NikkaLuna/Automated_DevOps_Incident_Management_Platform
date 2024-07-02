@@ -45,7 +45,7 @@ const ResolvedIncidentList = () => {
 
   return (
     <div className="main-content">
-      <h1>Resolved Incidents</h1>
+      <h1 className="incident-header">Resolved Incidents</h1> {/* Added className here */}
       <div className="table-container">
         <table id="resolvedIncidentTable" className="display nowrap dataTable" style={{ width: '100%' }}>
           <thead>

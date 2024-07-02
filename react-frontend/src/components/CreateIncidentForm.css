@@ -1,67 +1,58 @@
 /* src/components/CreateIncidentForm.css */
-
 .header {
     color: #ffffff; /* White color for the header */
-    text-align: center; /* Align text to the right */
+    text-align: center; /* Align text to the center */
     margin-bottom: 20px;
+    font-size: 2rem; /* Adjust font size to match the Dashboard header */
   }
-
+  
   .incident-form {
     width: 100%; /* Ensure it uses the full available width */
     max-width: 800px; /* Adjust to make the container smaller */
-    margin: 20px auto; /* Add margin-top to move it down */
+    margin: 0 auto; /* Center the form horizontally */
     background: #1c1c1c; /* Set form background to dark gray */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.incident-form .form-group label {
+  }
+  
+  .incident-form .form-group label {
     color: #ecf0f1; /* Light text color for better contrast */
-}
-
-.incident-form .form-control {
+  }
+  
+  .incident-form .form-control {
     background: #ffffff; /* White background for input fields */
     color: #1c1c1c; /* Dark text color for input fields */
     border: 1px solid #4e73df;
-}
-
-.incident-form .form-control:focus {
+  }
+  
+  .incident-form .form-control:focus {
     border-color: #2e59d9;
     box-shadow: 0 0 8px rgba(78, 115, 223, 0.2);
-}
-
-.incident-form .btn-primary {
+  }
+  
+  .incident-form .btn-primary {
     background-color: #4e73df;
     border-color: #4e73df;
-}
-
-.incident-form .btn-primary:hover {
+  }
+  
+  .incident-form .btn-primary:hover {
     background-color: #2e59d9;
     border-color: #2e59d9;
-}
-
-/* General container styling */
-.container {
+  }
+  
+  /* General container styling */
+  .container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    min-height: 10vh;
-    background-color: #000; /* Set to dark gray */
-}
-
-/* Custom container styling */
-.custom-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding-top: 20px;  /* Add any desired padding */
     min-height: 100vh;  /* Maintain full viewport height */
     background-color: transparent;  /* Let the main page's background show through */
-    //margin-top: 20px !important;  /* Override any existing top margin */
-    padding-top: 50px;  /* Add any desired padding */
-}
+  }
 
-.form-wrapper {
+  .form-wrapper {
     align-self: flex-start;  /* Align the form to the top of main-content */
     width: 100%; /* Ensure it takes the full width */
-}
+  }
+  
