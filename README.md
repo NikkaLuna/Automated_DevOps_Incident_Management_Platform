@@ -8,13 +8,16 @@ The frontend is developed using React, HTML, CSS, and JavaScript, offering dynam
 Infrastructure automation is achieved through Terraform, provisioning AWS resources efficiently. Docker and Ansible are used for containerization and deployment, and the system's performance is monitored using Prometheus and Grafana.
 
 
-
+<br>
 
 <p align="center">
   <img src="FrontEndIncidentManagement.png" alt="Front End" width="1000">
 </p>
 
 *Screenshot displaying the front-end interface of the application.*
+
+---
+
 
 
 ## Features
