@@ -1,7 +1,12 @@
 ## Automated DevOps Incident Management Platform
 
 ## Project Overview
-The DevOps Ticket Management System is designed to streamline incident resolution in IT environments. It employs Django and Django REST Framework for the backend, with PostgreSQL for data management. The frontend is developed using React, HTML, CSS, and JavaScript, offering dynamic features such as ticket categorization and automated incident resolution workflows. Infrastructure automation is achieved through Terraform, provisioning AWS resources efficiently. Docker and Ansible are used for containerization and deployment, and the system's performance is monitored using Prometheus and Grafana.
+The DevOps Ticket Management System is designed to streamline incident resolution in IT environments. It employs Django and Django REST Framework for the backend, with PostgreSQL for data management. 
+
+The frontend is developed using React, HTML, CSS, and JavaScript, offering dynamic features such as ticket categorization and automated incident resolution workflows. 
+
+Infrastructure automation is achieved through Terraform, provisioning AWS resources efficiently. Docker and Ansible are used for containerization and deployment, and the system's performance is monitored using Prometheus and Grafana.
+
 
 
 
