@@ -47,7 +47,7 @@ Infrastructure automation is achieved through Terraform, provisioning AWS resour
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-repo/ticket-management-system.git
+    git clone https://github.com/your-repo/ticket-management-system.git](https://github.com/NikkaLuna/Automated_DevOps_Incident_Management_Platform
     cd ticket-management-system
     ```
 
